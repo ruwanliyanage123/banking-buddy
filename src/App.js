@@ -35,8 +35,7 @@ function App() {
 }
 
 function LoginPage({ setIsLoggedIn }) {
-  const navigate = useNavigate(); // Define navigate using useNavigate
-
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
     const username = e.target.username.value;
@@ -45,7 +44,7 @@ function LoginPage({ setIsLoggedIn }) {
     try {
       const data = await login(username, password);
       console.log("Login data:", data);
-      if (data) {
+      if (data.length > 0 && data.split(".").length === 3) {
         setIsLoggedIn(true);
         navigate("/landing");
       } else {
