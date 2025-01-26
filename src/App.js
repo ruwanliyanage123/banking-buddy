@@ -1,17 +1,17 @@
 import React, { useState } from "react";
+import LandingPage from "./LandingPage";
+import { login } from "./http-service";
+import { useNavigate } from "react-router-dom";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
-  useNavigate,
 } from "react-router-dom";
 import "./App.css";
-import { login } from "./http-service";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   return (
     <Router>
       <div className="App">
@@ -33,14 +33,14 @@ function App() {
     </Router>
   );
 }
+export default App;
 
-function LoginPage({ setIsLoggedIn }) {
+const LoginPage = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
     const username = e.target.username.value;
     const password = e.target.password.value;
-
     try {
       const data = await login(username, password);
       console.log("Login data:", data);
@@ -73,15 +73,4 @@ function LoginPage({ setIsLoggedIn }) {
       </div>
     </div>
   );
-}
-
-function LandingPage() {
-  return (
-    <div>
-      <h1>Welcome to the Landing Page</h1>
-      <p>This is the landing page of the application.</p>
-    </div>
-  );
-}
-
-export default App;
+};
